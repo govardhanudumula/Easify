@@ -3,9 +3,9 @@ import HeaderComponent from "./HeaderComponent";
 import NavbarComponent from "./NavbarComponent";
 import DashboardComponent from "./DashboardComponent";
 import ApprovedComponent from "./ApprovedComponent";
-import ICandidate from "../../interfaces/Candidate";
-import { getPendingCandidate } from "../../dummydata";
-import { getVerifiedCandidates } from "../../dummydata";
+import ICandidate from "../../Interfaces/ICandidate";
+import { getPendingCandidate } from "../../Common/Dummydata";
+import { getVerifiedCandidates } from "../../Common/Dummydata";
 
 interface ILayoutState
 {

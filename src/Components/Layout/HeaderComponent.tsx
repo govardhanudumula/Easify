@@ -1,7 +1,7 @@
 import React from "react";
-import companylogo from ".././../assets/easify.png"
-import profilelogo from "../../assets/profilelogo.svg"
-import "../../../App.css";
+import companylogo from "../../Assets/easify.png"
+import profilelogo from "../../Assets/profilelogo.svg"
+import "../../App.css";
 class HeaderComponent extends React.Component
 {
     render()
