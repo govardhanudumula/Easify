@@ -1,5 +1,5 @@
 import React from "react";
-import ICandidate from "../../interfaces/Candidate";
+import ICandidate from "../../Interfaces/ICandidate";
 
 interface IDashboardProps
 {
@@ -18,10 +18,11 @@ class DashboardComponent extends React.Component<IDashboardProps>
     {
         return(
             <>
-            <div className="mt-3">
-                 <table className="table" >
-                        <thead className="thead-light">
-                            <tr className="row">
+            <div className="rounded-2 p-3">
+                 <table className="row py-3" >
+                    
+                        <thead className="bg-white">
+                            <tr className="row p-1 py-3" id="bg-white">
                                 <th className="col-2">Full Name</th>
                                 <th className="col-3">Gmail</th>
                                 <th className="col-3">Designation</th>
@@ -32,7 +33,7 @@ class DashboardComponent extends React.Component<IDashboardProps>
                         </thead>
                         <tbody>
                             {this.props.candidates.map((candidate:ICandidate)=>{
-                            return <tr className="row" >
+                            return <tr className="row p-1 py-3" >
                                     <td className="col-2">{candidate.fullname}</td>
                                     <td className="col-3">{candidate.gmail}</td>
                                     <td className="col-3">{candidate.designation}</td>
@@ -40,7 +41,7 @@ class DashboardComponent extends React.Component<IDashboardProps>
                                     <td className="col-1 text-center text-white">
                                         <span className={`rounded-4 bg-success1
                                              ${candidate.verificationstatus==="pending"? 'bg-pending':'bg-emailsend'} `}
-                                                 style={{padding:"3px 10px",fontSize:"12px"}} >
+                                                 style={{padding:"4px 8px",fontSize:"12px"}} >
                                                     {candidate.verificationstatus}
                                         </span>
                                     </td>

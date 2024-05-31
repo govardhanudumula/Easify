@@ -1,6 +1,6 @@
 *
 {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 .company-logo
 {
@@ -33,10 +33,24 @@
 
 .bg-pending
 {
-  background-color: #f15665;
+  background-color: #f29339;
 }
 
 .bg-emailsend
 {
   background-color: #007bff;
+}
+table tr:nth-child(odd) {
+  background-color: #7d5dc817 !important;
+}
+table tr:nth-child(even) {
+  background-color: white !important;
+}
+table thead
+{
+  background-color: white !important;
+}
+#bg-white
+{
+  background-color: white  !important;
 }

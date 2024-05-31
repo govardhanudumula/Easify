@@ -1,4 +1,5 @@
 import React from "react";
+import AddCandidateComponent from "./AddCandidateComponent";
 
 
 interface INavbarProps
@@ -8,7 +9,8 @@ interface INavbarProps
 
 interface INavbarState
 {
-    activeItem:string;   
+    activeItem:string;  
+    openAddForm:boolean; 
 }
 
 
@@ -19,10 +21,14 @@ class NavbarComponent extends React.Component<INavbarProps,INavbarState>
   {
     super(props);
     this.state={
-      activeItem :"Dashboard"
+      activeItem :"Dashboard",
+      openAddForm:false
     }
   }
 
+    handleClick =()=>{
+      this.setState({openAddForm:true});
+    }
     
    
     updateActiveItem =(item:string)=>{
@@ -35,6 +41,7 @@ class NavbarComponent extends React.Component<INavbarProps,INavbarState>
     render()
     {
         return (
+          <>
             <div className="px-5"  style={{ backgroundColor:"white"}}>
               <div className="navbar row align-items-center" style={{backgroundColor: 'white'}}>
                 <div className="col-8 ">
@@ -45,13 +52,16 @@ class NavbarComponent extends React.Component<INavbarProps,INavbarState>
                     </ul>
                 </div>
                 <div className="col-2 py-1">
-                    <input type="text" className="w-100 border-1 rounded-pill" placeholder="Search by name..."/>
+                    <input type="text" className="w-100 rounded-pill" placeholder="Search by name..." style={{border:"1px solid rgb(116 108 108 / 26%)"}}/>
                   </div>
                 <div className="col-2 d-flex justify-content-end align-items-center">
-                  <button className="border-0 px-4 py-2 bg-easify text-white" style={{ borderRadius: '10px'}}>New Candidate</button>
+                  <button className="border-0 px-4 py-2 bg-easify text-white" style={{ borderRadius: '10px'}} onClick={this.handleClick}>New Candidate</button>
                 </div>
               </div>
             </div>
+            <AddCandidateComponent/>
+            {this.state.openAddForm && <AddCandidateComponent/>}
+          </>  
           ); 
     }
 
