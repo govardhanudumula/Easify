@@ -1,0 +1,38 @@
+.company-logo
+{
+  width: 200px;
+  height: 80px;
+}
+.profile-logo
+{
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.bg-easify
+{
+  background-color: #795ec9;
+}
+.text-easify
+{
+  color: #795ec9;
+}
+
+.active-list-item,.list-item:hover {
+  background-color: #795ec9;
+  cursor: pointer;
+  color:white;
+  border-radius:10px;         
+}
+
+.bg-pending
+{
+  background-color: #f15665;
+}
+
+.bg-emailsend
+{
+  background-color: #007bff;
+}
