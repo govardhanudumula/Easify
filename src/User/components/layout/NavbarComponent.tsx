@@ -35,7 +35,7 @@ class NavbarComponent extends React.Component<INavbarProps,INavbarState>
     render()
     {
         return (
-            <div className="px-5"  style={{ backgroundColor:"#edf1f7"}}>
+            <div className="px-5"  style={{ backgroundColor:"white"}}>
               <div className="navbar row align-items-center" style={{backgroundColor: 'white'}}>
                 <div className="col-8 ">
                     <ul className="list-unstyled d-flex align-items-center my-2">

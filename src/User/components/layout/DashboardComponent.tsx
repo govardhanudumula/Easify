@@ -18,7 +18,7 @@ class DashboardComponent extends React.Component<IDashboardProps>
     {
         return(
             <>
-            <div>
+            <div className="mt-3">
                  <table className="table" >
                         <thead className="thead-light">
                             <tr className="row">

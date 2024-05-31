@@ -39,10 +39,10 @@ class LayoutComponent extends React.Component<{},ILayoutState>
         
         return(
             <>
-                <div>
+                <div  style={{backgroundColor:"#edf1f7"}}>
                     <HeaderComponent/>
                     <NavbarComponent getActiveNavItem = {this.updateSelectedNavItem} />
-                    <div className="px-5" style={{backgroundColor:"#edf1f7"}}>
+                    <div  style={{backgroundColor:"#edf1f7",padding:"0px 75px"}}>
                         {this.state.selectedNavItem==="Dashboard"?<DashboardComponent  candidates={this.state.candidates}/>:<ApprovedComponent candidates={this.state.candidates}/>}                       
                     </div>
                  
