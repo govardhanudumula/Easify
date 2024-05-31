@@ -1,0 +1,173 @@
+$main-color:#795ec9;
+$light-color:lightgray;
+$dark-color: #6641d5; 
+a{
+    text-decoration:none;
+
+}
+
+.form-container{
+    flex-direction:column;
+    background-color:#faf9ff;
+}
+
+.progress-container {
+    position: relative;
+    padding: 1em;
+
+    ul.progress-steps {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        li {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        li > span {
+            position: relative;
+            height: 40px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1em;
+            border-radius: 50%;
+            background-color: gray;
+        }
+
+        li.active > span {
+            background-color: #795ec9;
+            border: 4px solid #e5e5e55c;
+            color: white;
+            z-index:1;
+        }
+        li p span{
+            font-size:smaller;
+            color:$light-color;
+            display:none;
+        }
+
+        li p{
+            position:absolute;
+            top:-2em;
+            font-size:12px;
+        }
+    }
+}
+
+.form-container form{
+    width:100%;
+    padding:3em;
+    background-color:white;
+}
+
+.form-container form > div{
+    max-width:400px;
+    margin:0 auto;
+}
+
+.form-container form > div p{
+    color:$light-color;
+    margin-bottom:2em;
+}
+
+form > div > div:not(.checkbox){
+    display:flex;
+    flex-direction:column;
+    margin-bottom:2em;
+}
+
+form label{
+    font-size:smaller;
+
+}
+form >div:not(.btn-group){
+    display:none;
+}
+
+form>div.active{
+    display:block;
+}
+form :where(input,select){
+    height:40px;
+    padding:0 1em;
+    border-radius:7px;
+    outline-color:gray;
+    border:1px solid $light-color;
+    background-color:transparent;
+}
+
+.btn-group{
+    display:flex;
+    flex-wrap:wrap;
+    gap:1em;
+    margin-top:2em;
+}
+
+.btn-group [class*="btn-"]{
+    background-color:$main-color;
+    color:white;
+    padding:.5em 1.5em;
+    border:4px solid $main-color;
+    border-radius:30px;
+    cursor:pointer;
+    transition:background-color .3s, border-color .3s ease-out;
+}
+.btn-group [class*="btn-"]:disabled{
+    border-color:$light-color !important;
+    background-color:$light-color !important;
+    cursor:text;
+}
+.btn-group [class*="btn-"]:hover:not(:disabled){
+    background-color:$dark-color;
+    border-color:$main-color;
+}
+
+.btn-group .btn-submit{
+    display:none;
+}
+
+.form-three.active ~ .btn-group .btn-submit{
+    display:block;
+}
+::placeholder{
+    color:$light-color;
+}
+@media screen and (min-width:768px) {
+    .form-container{
+        flex-direction:row;
+    }
+    .progress-container {
+        flex: 1 0 35%;
+        min-width: 300px;
+
+        ul.progress-steps {
+            flex-direction: column !important;
+            gap: 0;
+            display:grid;
+            li:not(:last-child)::before {
+                content: '';
+                position: absolute;
+                left: 20px;
+                top: 30px;
+                width: 2px;
+                height: 65px;
+                background-color: $light-color;
+            }
+
+            li p {
+                position: relative;
+                top: auto;
+                font-size: inherit;
+            }
+
+            li p span{
+                display:block;
+            }
+        }
+    }
+}
