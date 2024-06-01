@@ -20,6 +20,7 @@ a{
         flex-direction: row;
         align-items: center;
         justify-content: center;
+        font-size:x-large;
 
         li {
             position: relative;
@@ -29,14 +30,15 @@ a{
 
         li > span {
             position: relative;
-            height: 40px;
-            width: 40px;
+            height: 50px;
+            width: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 1em;
             border-radius: 50%;
             background-color: gray;
+            font-size:x-large;
         }
 
         li.active > span {
@@ -67,7 +69,6 @@ a{
 
 .form-container form > div{
     max-width:400px;
-    margin:0 auto;
 }
 
 .form-container form > div p{
@@ -162,10 +163,10 @@ form :where(input,select){
             li:not(:last-child)::before {
                 content: '';
                 position: absolute;
-                left: 20px;
+                left: 25px;
                 top: 30px;
                 width: 2px;
-                height: 65px;
+                height: 75px;
                 background-color: $light-color;
             }
 
