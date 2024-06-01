@@ -1,6 +1,7 @@
 *
 {
   box-sizing: border-box !important;
+  background-color:"#edf1f7";
 }
 .company-logo
 {
@@ -67,4 +68,8 @@ table thead
 {
   outline: none;
   padding-left: 20px;
+}
+.cursor-pointer
+{
+  cursor: pointer;
 }

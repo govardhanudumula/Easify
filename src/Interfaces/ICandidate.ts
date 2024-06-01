@@ -15,7 +15,7 @@ export interface ICandidateFormData{
     PanOtp: number;
 
 }
-interface ICandidatePersonalInfo
+export interface ICandidatePersonalInfo
 {
     AadharNumber:number,
     AadharVerifyStatus:boolean,
@@ -23,28 +23,30 @@ interface ICandidatePersonalInfo
     PanVerifyStatus:boolean,
     UanNumber:number,
     UanVerifyStatus:boolean
+    Status:boolean
 }
-interface ICandidateEducation
+export interface ICandidateEducation
 {
     CollegeName:string,
     EducationType:String,
     Stream:string,
     JoiningYear:number,
     PassoutYear:number,
-    Documnet:string,
+    Document:string,
     Status:boolean
 }
-interface ICandidateExperience
+export interface ICandidateExperience
 {
     CompanyName:string,
     WebsiteUrl:string,
-    DOJ:any,
-    DOE:any,
+    DOJ:string,
+    DOE:string,
     Experience:string,
+    Document:string,
     Status:boolean
 }
 
-interface ICandidateDetails
+export interface ICandidateDetails
 {
     Candidate:ICandidate,
     PersonalDetails:ICandidatePersonalInfo,
