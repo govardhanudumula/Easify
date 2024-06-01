@@ -4,6 +4,7 @@ import ICandidate, { ICandidateFormData } from '../../../Interfaces/ICandidate';
 import FresherFormComponent from './FresherForm/FresherForm';
 import LoaderComponent from '../../../Common/Loader/Loader';
 import EmploymentFormComponent from './ExperiencedForm/EmploymentDetails';
+import EducationFormComponent from './EducationForm/EducationForm';
 
 export interface IFormProps {
 
@@ -138,7 +139,7 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                         <ul className="progress-steps">
                             <li className="step active">
                                 <span>1</span>
-                                <p>Aadhar<br /><span>Personal information</span></p>
+                                <p>Identity<br /><span>Identity Verification</span></p>
                             </li>
                             <li className="step">
                                 <span>2</span>
@@ -203,20 +204,9 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                         </div>
                         <div className={`form-three form-step ${this.state.active === 3 ? 'active' : ''}`}>
                             <div className="bg-svg"></div>
-                            <h2>Personal Information</h2>
+                            <h2>Educational Information</h2>
                             <p>Please enter you educational details carefully!</p>
-                            <div>
-                                <label>Aadhar Number</label>
-                                <input type="text"></input>
-                            </div>
-                            <div>
-                                <label>Aadhar Number</label>
-                                <input type="text"></input>
-                            </div>
-                            <div>
-                                <label>Aadhar Number</label>
-                                <input type="text"></input>
-                            </div>
+                            <EducationFormComponent candidate={this.state.candidate} onChangeField={this.onChangeField} />
                         </div>
                         <div className="btn-group">
                             <button type="button" className="btn-prev">Back</button>
