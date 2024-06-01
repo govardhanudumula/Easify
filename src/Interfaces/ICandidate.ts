@@ -7,3 +7,11 @@ interface ICandidate
     verificationstatus:string
 }
 export default ICandidate;
+
+export interface ICandidateFormData{
+    AadharNumber: number;
+    AadharOtp: number;
+    PanNumber: number;
+    PanOtp: number;
+
+}

@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\Interfaces"
   ],
+  "SelectedNode": "\\src\\Interfaces\\ICandidate.ts",
   "PreviewInSolutionExplorer": false
 }
