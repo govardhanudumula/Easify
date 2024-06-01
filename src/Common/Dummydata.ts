@@ -143,6 +143,7 @@ const Candidates: ICandidate[] = [
     }
 ];
 
+
 //localStorage.setItem("candidates",JSON.stringify(Candidates));
 
 export function getCandidates():ICandidate[]

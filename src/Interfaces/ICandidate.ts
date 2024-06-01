@@ -15,3 +15,39 @@ export interface ICandidateFormData{
     PanOtp: number;
 
 }
+interface ICandidatePersonalInfo
+{
+    AadharNumber:number,
+    AadharVerifyStatus:boolean,
+    PanNumber:string,
+    PanVerifyStatus:boolean,
+    UanNumber:number,
+    UanVerifyStatus:boolean
+}
+interface ICandidateEducation
+{
+    CollegeName:string,
+    EducationType:String,
+    Stream:string,
+    JoiningYear:number,
+    PassoutYear:number,
+    Documnet:string,
+    Status:boolean
+}
+interface ICandidateExperience
+{
+    CompanyName:string,
+    WebsiteUrl:string,
+    DOJ:any,
+    DOE:any,
+    Experience:string,
+    Status:boolean
+}
+
+interface ICandidateDetails
+{
+    Candidate:ICandidate,
+    PersonalDetails:ICandidatePersonalInfo,
+    EducationDetails:ICandidateEducation[],
+    ExperienceDetails:ICandidateExperience[]
+}
