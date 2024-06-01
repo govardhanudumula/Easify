@@ -54,3 +54,9 @@ table thead
 {
   background-color: white  !important;
 }
+
+.searchbox,.searchbox:focus-visible
+{
+  outline: none;
+  padding-left: 20px;
+}

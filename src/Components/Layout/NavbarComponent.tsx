@@ -1,16 +1,20 @@
 import React from "react";
 import AddCandidateComponent from "./AddCandidateComponent";
+import ICandidate from "../../Interfaces/ICandidate";
 
 
 interface INavbarProps
 {
   getActiveNavItem:(activeItem:string)=>void;
+  onAddCandidate:(candidate:ICandidate)=>void
+  onSearching:(searchingName:string)=>void;
 }
 
 interface INavbarState
 {
     activeItem:string;  
     openAddForm:boolean; 
+    searchName:string
 }
 
 
@@ -22,7 +26,8 @@ class NavbarComponent extends React.Component<INavbarProps,INavbarState>
     super(props);
     this.state={
       activeItem :"Dashboard",
-      openAddForm:false
+      openAddForm:false,
+      searchName:""
     }
   }
 
@@ -36,7 +41,23 @@ class NavbarComponent extends React.Component<INavbarProps,INavbarState>
         this.props.getActiveNavItem(item);
        })
     }
+
+    handleForm = (closeForm:boolean)=>{
+      if(closeForm)
+        this.setState({openAddForm:false});
+    }
     
+    onFormSubmit = async (candidate:ICandidate)=>{
+      await this.setState({openAddForm:false});
+      this.props.onAddCandidate(candidate);
+    }
+
+    handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.target;
+      await this.setState({searchName:value}); 
+      this.props.onSearching(this.state.searchName);
+  }
+
     list = ["Dashboard","Approved"];
     render()
     {
@@ -52,15 +73,16 @@ class NavbarComponent extends React.Component<INavbarProps,INavbarState>
                     </ul>
                 </div>
                 <div className="col-2 py-1">
-                    <input type="text" className="w-100 rounded-pill" placeholder="Search by name..." style={{border:"1px solid rgb(116 108 108 / 26%)"}}/>
+                    <input type="text" className="w-100 rounded-pill searchbox" placeholder="Search by name..." value = {this.state.searchName} style={{border:"1px solid rgb(116 108 108 / 26%)"}}
+                      onChange={this.handleSearch}
+                    />
                   </div>
                 <div className="col-2 d-flex justify-content-end align-items-center">
                   <button className="border-0 px-4 py-2 bg-easify text-white" style={{ borderRadius: '10px'}} onClick={this.handleClick}>New Candidate</button>
                 </div>
               </div>
             </div>
-            <AddCandidateComponent/>
-            {this.state.openAddForm && <AddCandidateComponent/>}
+            {this.state.openAddForm && <AddCandidateComponent openForm = {this.state.openAddForm} onClose={this.handleForm} onFormSubmit = {this.onFormSubmit}/>}
           </>  
           ); 
     }

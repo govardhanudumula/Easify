@@ -6,6 +6,7 @@ import ApprovedComponent from "./ApprovedComponent";
 import ICandidate from "../../Interfaces/ICandidate";
 import { getPendingCandidate } from "../../Common/Dummydata";
 import { getVerifiedCandidates } from "../../Common/Dummydata";
+import { AddCandidate } from "../../Common/Dummydata";
 
 interface ILayoutState
 {
@@ -33,6 +34,19 @@ class LayoutComponent extends React.Component<{},ILayoutState>
           }
         )
     }
+
+    onAddCandidate = (candidate:ICandidate)=>{
+        AddCandidate(candidate);
+        this.setState({candidates:getPendingCandidate()});
+    }
+
+    onSearching = (searchName:string)=>{
+        searchName = searchName.trim();
+        if(this.state.selectedNavItem==="Dashboard")
+            this.setState({candidates:getPendingCandidate().filter(candidate=>candidate.fullname.toLowerCase().includes(searchName.toLowerCase()))});
+        else
+            this.setState({candidates:getVerifiedCandidates().filter(candidate=>candidate.fullname.toLowerCase().includes(searchName.toLowerCase()))});
+    }
  
     render()
     {
@@ -42,7 +56,8 @@ class LayoutComponent extends React.Component<{},ILayoutState>
                 <div  style={{backgroundColor:"#edf1f7"}}>
                     <div className="top-0 position-sticky">
                         <HeaderComponent/>
-                        <NavbarComponent getActiveNavItem = {this.updateSelectedNavItem} />
+                        <NavbarComponent getActiveNavItem = {this.updateSelectedNavItem}  onAddCandidate={this.onAddCandidate}
+                        onSearching = {this.onSearching} />
                     </div>
                  
                     <div className="mt-4" style={{backgroundColor:"#edf1f7",padding:"0px 75px"}}>
