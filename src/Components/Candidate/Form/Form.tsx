@@ -200,7 +200,7 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                             <div className="bg-svg"></div>
                             <h2>Employment Information</h2>
                             <p>Please enter the employment details carefully!</p>
-                            {!this.state.candidate.IsExperienced ? <FresherFormComponent candidate={this.state.candidate} onChangeField={this.onChangeField} /> :<EmploymentFormComponent />}
+                            {!this.state.candidate.IsExperienced ? <FresherFormComponent candidate={this.state.candidate} onChangeField={this.onChangeField} /> : <EmploymentFormComponent onChangeEMPField={this.onChangeField} />}
                         </div>
                         <div className={`form-three form-step ${this.state.active === 3 ? 'active' : ''}`}>
                             <div className="bg-svg"></div>
