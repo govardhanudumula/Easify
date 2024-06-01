@@ -13,5 +13,5 @@ export interface ICandidateFormData{
     AadharOtp: number;
     PanNumber: number;
     PanOtp: number;
-
+    IsExperienced:boolean;
 }
