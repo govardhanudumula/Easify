@@ -1,3 +1,7 @@
+*
+{
+  box-sizing: border-box !important;
+}
 .company-logo
 {
   width: 200px;
@@ -10,7 +14,15 @@
   background-color: white;
   border-radius: 50%;
 }
-
+html{
+   height:100%;
+}
+body{
+    height:100%;
+}
+#root{
+    height:100%;
+}
 .bg-easify
 {
   background-color: #795ec9;
@@ -29,10 +41,30 @@
 
 .bg-pending
 {
-  background-color: #f15665;
+  background-color: #f29339;
 }
 
 .bg-emailsend
 {
   background-color: #007bff;
+}
+table tr:nth-child(odd) {
+  background-color: #7d5dc817 !important;
+}
+table tr:nth-child(even) {
+  background-color: white !important;
+}
+table thead
+{
+  background-color: white !important;
+}
+#bg-white
+{
+  background-color: white  !important;
+}
+
+.searchbox,.searchbox:focus-visible
+{
+  outline: none;
+  padding-left: 20px;
 }
