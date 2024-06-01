@@ -11,6 +11,7 @@ class ApprovedComponent extends React.Component<IApprovedProps>
     constructor(props : IApprovedProps)
     {
         super(props);
+        this.state={}
     }
 
     render()
