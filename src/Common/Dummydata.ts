@@ -143,7 +143,7 @@ const Candidates: ICandidate[] = [
     }
 ];
 
-localStorage.setItem("candidates",JSON.stringify(Candidates));
+//localStorage.setItem("candidates",JSON.stringify(Candidates));
 
 export function getCandidates():ICandidate[]
 {
@@ -176,3 +176,18 @@ export function getVerifiedCandidates():ICandidate[]
      ,[])
     return candidates;
 }
+
+export function getDesignations():string[]
+{
+    const designation:string[] =Array.from(new Set(getCandidates().map((candidate) => candidate.designation)));
+    console.log(designation);
+    return  designation;
+}
+
+export function AddCandidate(candidate:ICandidate)
+{
+    var candidates = getCandidates();
+    candidates.unshift(candidate)
+    localStorage.setItem('candidates',JSON.stringify(candidates));
+}
+
