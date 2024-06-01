@@ -1,6 +1,7 @@
 import React from 'react';
 import './Form.scss';
 import ICandidate, { ICandidateFormData } from '../../../Interfaces/ICandidate';
+import FresherFormComponent from './FresherForm/FresherForm';
 
 export interface IFormProps {
 
@@ -10,6 +11,8 @@ export interface IFormState {
     candidate: ICandidateFormData;
     showOTPField: boolean;
     isAadharVerified: boolean;
+    showPanOtpField: boolean;
+    isPanVerified: boolean;
 }
 class FormComponent extends React.Component<IFormProps, IFormState> {
 
@@ -24,7 +27,9 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
             active: 1,
             candidate: {} as ICandidateFormData,
             showOTPField: false,
-            isAadharVerified:false
+            isAadharVerified: false,
+            showPanOtpField: false,
+            isPanVerified:false
         };
     }
 
@@ -83,11 +88,20 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
     onChangeField = (event: any) => {
         var details = this.state.candidate;
         var re = /^[0-9\\b]+$/;
-        if (event.target?.name === "aadhar-number" && (re.test(event?.target?.value) || event?.target?.value==='')) {
+        if (event.target?.name === "aadhar-number" && (re.test(event?.target?.value) || event?.target?.value === '') && event?.target?.value?.length < 13) {
             details.AadharNumber = event.target?.value;
         }
         if (event.target?.name === "aadhar-otp" && (re.test(event?.target?.value) || event?.target?.value === '') && event?.target?.value?.length<7) {
             details.AadharOtp = event.target?.value;
+        }
+        if (event.target?.name === "pan-number" && (re.test(event?.target?.value) || event?.target?.value === '') && event?.target?.value?.length < 11) {
+            details.PanNumber = event.target?.value;
+        }
+        if (event.target?.name === "pan-otp" && (re.test(event?.target?.value) || event?.target?.value === '') && event?.target?.value?.length < 7) {
+            details.PanOtp = event.target?.value;
+        }
+        if (event.target?.name === "experience") {
+            details.IsExperienced = !this.state.candidate.IsExperienced;
         }
         this.setState({ candidate: details });
     }
@@ -104,11 +118,11 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                             </li>
                             <li className="step">
                                 <span>2</span>
-                                <p>Experience<br /><span>Experience details</span></p>
+                                <p>Employment<br /><span>Employment Information</span></p>
                             </li>
                             <li className="step">
                                 <span>3</span>
-                                <p>Educational<br /><span>Educational details</span></p>
+                                <p>Education<br /><span>Educational Information</span></p>
                             </li>
                         </ul>
                     </div>
@@ -135,35 +149,30 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                             <div>
                                 <label>PAN Number</label>
                                 <div className="d-flex">
-                                    <input value={this.state.candidate.AadharNumber} type="text" onChange={this.onChangeField} name="pan-number"></input>
-                                    {!this.state.isAadharVerified && this.state.candidate.AadharNumber?.toString()?.length === 12 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ showOTPField: true }) }}>Send OTP</button>}
-                                    {this.state.isAadharVerified && < i className="bi bi-check-circle-fill verified-btn ps-2"></i>}
+                                    <input value={this.state.candidate.PanNumber} type="text" onChange={this.onChangeField} name="pan-number"></input>
+                                    {!this.state.isPanVerified && this.state.candidate.PanNumber?.toString()?.length === 10 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ showPanOtpField: true }) }}>Send OTP</button>}
+                                    {this.state.isPanVerified && < i className="bi bi-check-circle-fill verified-btn ps-2"></i>}
                                 </div>
                             </div>
-                            {!this.state.isAadharVerified && this.state.showOTPField && < div >
+                            {!this.state.isPanVerified && this.state.showPanOtpField && < div >
                                 <label>OTP</label>
                                 <div className="d-flex">
-                                    <input type="text" name="aadhar-otp" value={this.state.candidate.AadharOtp} onChange={this.onChangeField}></input>
-                                    {this.state.candidate.AadharOtp?.toString()?.length === 6 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ isAadharVerified: true }) }}>Verify OTP</button>}
+                                    <input type="text" name="pan-otp" value={this.state.candidate.PanOtp} onChange={this.onChangeField}></input>
+                                    {this.state.candidate.PanOtp?.toString()?.length === 6 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ isPanVerified: true }) }}>Verify OTP</button>}
                                 </div>
                             </div>}
+                            <div>
+                                <div className="d-flex">
+                                    <input type="checkbox" onChange={this.onChangeField} name="experience" onClick={() => this.onChangeField}></input>
+                                    <label className="ps-3 mt-auto mb-auto">I'm experienced</label>
+                                </div>
+                            </div>
                         </div>
                         <div className={`form-two form-step ${this.state.active === 2 ? 'active' : ''}`}>
                             <div className="bg-svg"></div>
-                            <h2>Experience Details</h2>
-                            <p>Please enter the experience details carefully!</p>
-                            <div>
-                                <label>Aadhar Number</label>
-                                <input type="text"></input>
-                            </div>
-                            <div>
-                                <label>Aadhar Number</label>
-                                <input type="text"></input>
-                            </div>
-                            <div>
-                                <label>Aadhar Number</label>
-                                <input type="text"></input>
-                            </div>
+                            <h2>Employment Information</h2>
+                            <p>Please enter the employment details carefully!</p>
+                            {!this.state.candidate.IsExperienced && <FresherFormComponent candidate={this.state.candidate} onChangeField={this.onChangeField} />}
                         </div>
                         <div className={`form-three form-step ${this.state.active === 3 ? 'active' : ''}`}>
                             <div className="bg-svg"></div>
