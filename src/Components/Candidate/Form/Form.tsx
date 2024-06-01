@@ -2,6 +2,8 @@ import React from 'react';
 import './Form.scss';
 import ICandidate, { ICandidateFormData } from '../../../Interfaces/ICandidate';
 import FresherFormComponent from './FresherForm/FresherForm';
+import LoaderComponent from '../../../Common/Loader/Loader';
+import EmploymentFormComponent from './ExperiencedForm/EmploymentDetails';
 import EducationFormComponent from './EducationForm/EducationForm';
 
 export interface IFormProps {
@@ -14,6 +16,8 @@ export interface IFormState {
     isAadharVerified: boolean;
     showPanOtpField: boolean;
     isPanVerified: boolean;
+    isAadarLoader: boolean;
+    isPANLoader: boolean;
 }
 class FormComponent extends React.Component<IFormProps, IFormState> {
 
@@ -30,7 +34,9 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
             showOTPField: false,
             isAadharVerified: false,
             showPanOtpField: false,
-            isPanVerified:false
+            isPanVerified: false,
+            isAadarLoader: false,
+            isPANLoader:false,
         };
     }
 
@@ -107,6 +113,24 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
         this.setState({ candidate: details });
     }
 
+    verifyAadar(e:any) {
+        e.preventDefault();
+        this.setState({isAadarLoader:true})
+        setTimeout(() => {
+            this.setState({ isAadharVerified: true })
+        },5000)
+        
+    }
+
+    verifyPAN(e: any) {
+        e.preventDefault();
+        this.setState({ isPANLoader: true })
+        setTimeout(() => {
+            this.setState({ isPanVerified: true })
+        },5000)
+       
+    }
+
     render() {
         return (
             <div className="h-100">
@@ -136,7 +160,7 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                                 <label>Aadhar Number</label>
                                 <div className="d-flex">
                                     <input value={this.state.candidate.AadharNumber} type="text" onChange={this.onChangeField} name="aadhar-number"></input>
-                                    {!this.state.isAadharVerified && this.state.candidate.AadharNumber?.toString()?.length === 12 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ showOTPField: true }) }}>Send OTP</button>}
+                                    {!this.state.isAadharVerified && this.state.candidate.AadharNumber?.toString()?.length === 12 && <div>{this.state.isAadarLoader && !this.state.isAadharVerified ? <div> <LoaderComponent /> </div> : <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ showOTPField: true }) }}>Send OTP</button>} </div>}
                                     {this.state.isAadharVerified && < i className="bi bi-check-circle-fill verified-btn ps-2"></i>}
                                 </div>
                             </div>
@@ -144,14 +168,17 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                                 <label>OTP</label>
                                 <div className="d-flex">
                                     <input type="text" name="aadhar-otp" value={this.state.candidate.AadharOtp} onChange={this.onChangeField}></input>
-                                    {this.state.candidate.AadharOtp?.toString()?.length === 6 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ isAadharVerified:true }) }}>Verify OTP</button>}
+                                    {this.state.candidate.AadharOtp?.toString()?.length === 6 && <button className="btn btn-otp ms-2" onClick={(e) => { this.verifyAadar(e) }}>Verify OTP</button>}
+                                            
+                                    
+
                                 </div>
                             </div>}
                             <div>
                                 <label>PAN Number</label>
                                 <div className="d-flex">
                                     <input value={this.state.candidate.PanNumber} type="text" onChange={this.onChangeField} name="pan-number"></input>
-                                    {!this.state.isPanVerified && this.state.candidate.PanNumber?.toString()?.length === 10 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ showPanOtpField: true }) }}>Send OTP</button>}
+                                    {!this.state.isPanVerified && this.state.candidate.PanNumber?.toString()?.length === 10 && <div>  {this.state.isPANLoader && !this.state.isPanVerified ? <div> <LoaderComponent /> </div> : <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ showPanOtpField: true }) }}>Send OTP</button>} </div>}
                                     {this.state.isPanVerified && < i className="bi bi-check-circle-fill verified-btn ps-2"></i>}
                                 </div>
                             </div>
@@ -159,7 +186,7 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                                 <label>OTP</label>
                                 <div className="d-flex">
                                     <input type="text" name="pan-otp" value={this.state.candidate.PanOtp} onChange={this.onChangeField}></input>
-                                    {this.state.candidate.PanOtp?.toString()?.length === 6 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ isPanVerified: true }) }}>Verify OTP</button>}
+                                    {this.state.candidate.PanOtp?.toString()?.length === 6 &&  <button className="btn btn-otp ms-2" onClick={(e) => { this.verifyPAN(e) }}>Verify OTP</button>}
                                 </div>
                             </div>}
                             <div>
@@ -173,7 +200,7 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                             <div className="bg-svg"></div>
                             <h2>Employment Information</h2>
                             <p>Please enter the employment details carefully!</p>
-                            {!this.state.candidate.IsExperienced && <FresherFormComponent candidate={this.state.candidate} onChangeField={this.onChangeField} />}
+                            {!this.state.candidate.IsExperienced ? <FresherFormComponent candidate={this.state.candidate} onChangeField={this.onChangeField} /> :<EmploymentFormComponent />}
                         </div>
                         <div className={`form-three form-step ${this.state.active === 3 ? 'active' : ''}`}>
                             <div className="bg-svg"></div>
@@ -186,6 +213,7 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                             <button type="button" className="btn-next">Next Step</button>
                             <button type="button" className="btn-submit">Submit</button>
                         </div>
+
                     </form>
                 </div>
             </div>

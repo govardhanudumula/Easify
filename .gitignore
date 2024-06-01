@@ -21,5 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/.vs/Easify/FileContentIndex
 /.vs
 /.vs/Project_Easify/v17/.wsuo
