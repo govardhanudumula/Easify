@@ -108,6 +108,16 @@ form :where(input,select){
     margin-top:2em;
 }
 
+.btn-otp{
+    background-color:$main-color;
+    color:white;
+}
+
+.verified-btn{
+    color:green;
+    font-size:25px;
+}
+
 .btn-group [class*="btn-"]{
     background-color:$main-color;
     color:white;

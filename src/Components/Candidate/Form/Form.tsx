@@ -1,23 +1,30 @@
 import React from 'react';
 import './Form.scss';
+import ICandidate, { ICandidateFormData } from '../../../Interfaces/ICandidate';
 
 export interface IFormProps {
 
 }
 export interface IFormState {
     active: number;
+    candidate: ICandidateFormData;
+    showOTPField: boolean;
+    isAadharVerified: boolean;
 }
 class FormComponent extends React.Component<IFormProps, IFormState> {
 
     nextButton: HTMLButtonElement | null = null;
     prevButton: HTMLButtonElement | null = null;
-    steps: NodeListOf<Element> | null= null;
+    steps: NodeListOf<Element> | null = null;
     form_steps: NodeListOf<Element> | null = null;
 
     constructor(props: IFormProps) {
         super(props);
         this.state = {
-            active: 1
+            active: 1,
+            candidate: {} as ICandidateFormData,
+            showOTPField: false,
+            isAadharVerified:false
         };
     }
 
@@ -74,7 +81,15 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
     }
 
     onChangeField = (event: any) => {
-        console.log(event.target.value);
+        var details = this.state.candidate;
+        var re = /^[0-9\\b]+$/;
+        if (event.target?.name === "aadhar-number" && (re.test(event?.target?.value) || event?.target?.value==='')) {
+            details.AadharNumber = event.target?.value;
+        }
+        if (event.target?.name === "aadhar-otp" && (re.test(event?.target?.value) || event?.target?.value === '') && event?.target?.value?.length<7) {
+            details.AadharOtp = event.target?.value;
+        }
+        this.setState({ candidate: details });
     }
 
     render() {
@@ -102,23 +117,36 @@ class FormComponent extends React.Component<IFormProps, IFormState> {
                             <div className="bg-svg"></div>
                             <h2>Personal Details</h2>
                             <p>Verify your personal details here</p>
-                                <div>
+                            <div>
                                 <label>Aadhar Number</label>
-                                <input type="text" onChange={this.onChangeField} name="aadhar-number"></input>
+                                <div className="d-flex">
+                                    <input value={this.state.candidate.AadharNumber} type="text" onChange={this.onChangeField} name="aadhar-number"></input>
+                                    {!this.state.isAadharVerified && this.state.candidate.AadharNumber?.toString()?.length === 12 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ showOTPField: true }) }}>Send OTP</button>}
+                                    {this.state.isAadharVerified && < i className="bi bi-check-circle-fill verified-btn ps-2"></i>}
                                 </div>
-                                <div>
-                                    <label>OTP</label>
-                                    <input type="text" name="aadhar-otp"></input>
                             </div>
-                            
+                            {!this.state.isAadharVerified && this.state.showOTPField && < div >
+                                <label>OTP</label>
+                                <div className="d-flex">
+                                    <input type="text" name="aadhar-otp" value={this.state.candidate.AadharOtp} onChange={this.onChangeField}></input>
+                                    {this.state.candidate.AadharOtp?.toString()?.length === 6 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ isAadharVerified:true }) }}>Verify OTP</button>}
+                                </div>
+                            </div>}
                             <div>
                                 <label>PAN Number</label>
-                                <input type="text"></input>
+                                <div className="d-flex">
+                                    <input value={this.state.candidate.AadharNumber} type="text" onChange={this.onChangeField} name="pan-number"></input>
+                                    {!this.state.isAadharVerified && this.state.candidate.AadharNumber?.toString()?.length === 12 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ showOTPField: true }) }}>Send OTP</button>}
+                                    {this.state.isAadharVerified && < i className="bi bi-check-circle-fill verified-btn ps-2"></i>}
+                                </div>
                             </div>
-                            <div>
+                            {!this.state.isAadharVerified && this.state.showOTPField && < div >
                                 <label>OTP</label>
-                                <input type="text"></input>
-                            </div>
+                                <div className="d-flex">
+                                    <input type="text" name="aadhar-otp" value={this.state.candidate.AadharOtp} onChange={this.onChangeField}></input>
+                                    {this.state.candidate.AadharOtp?.toString()?.length === 6 && <button className="btn btn-otp ms-2" onClick={(e) => { e.preventDefault(); this.setState({ isAadharVerified: true }) }}>Verify OTP</button>}
+                                </div>
+                            </div>}
                         </div>
                         <div className={`form-two form-step ${this.state.active === 2 ? 'active' : ''}`}>
                             <div className="bg-svg"></div>
