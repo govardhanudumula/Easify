@@ -9,8 +9,8 @@ class App extends React.Component
   render()
   {
     return(<>
-        {false && <LayoutComponent />}
-        <FormComponent/>
+        {true && <LayoutComponent />}
+        {/* <FormComponent/> */}
     </>)
 
   }

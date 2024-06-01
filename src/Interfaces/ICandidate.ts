@@ -18,3 +18,41 @@ export interface ICandidateFormData{
     UANOtp: number;
     PFavailable: boolean;
 }
+export interface ICandidatePersonalInfo
+{
+    AadharNumber:number,
+    AadharVerifyStatus:boolean,
+    PanNumber:string,
+    PanVerifyStatus:boolean,
+    UanNumber:number,
+    UanVerifyStatus:boolean
+    Status:boolean
+}
+export interface ICandidateEducation
+{
+    CollegeName:string,
+    EducationType:String,
+    Stream:string,
+    JoiningYear:number,
+    PassoutYear:number,
+    Document:string,
+    Status:boolean
+}
+export interface ICandidateExperience
+{
+    CompanyName:string,
+    WebsiteUrl:string,
+    DOJ:string,
+    DOE:string,
+    Experience:string,
+    Document:string,
+    Status:boolean
+}
+
+export interface ICandidateDetails
+{
+    Candidate:ICandidate,
+    PersonalDetails:ICandidatePersonalInfo,
+    EducationDetails:ICandidateEducation[],
+    ExperienceDetails:ICandidateExperience[]
+}
