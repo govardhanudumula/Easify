@@ -1,4 +1,4 @@
-import ICandidate from "./interfaces/Candidate";
+import ICandidate from "../Interfaces/ICandidate";
 
 const Candidates: ICandidate[] = [
     {

@@ -1,24 +1,25 @@
 import React from "react";
-import ICandidate from "../../interfaces/Candidate";
+import ICandidate from "../../Interfaces/ICandidate";
 
-interface IApprovedProps
+interface IDashboardProps
 {
     candidates:ICandidate[];
 }
 
-class ApprovedComponent extends React.Component<IApprovedProps>
+class DashboardComponent extends React.Component<IDashboardProps>
 {
-    constructor(props : IApprovedProps)
+    constructor(props: IDashboardProps)
     {
-        super(props);
+        super(props)
     }
+
 
     render()
     {
         return(
             <>
-                 <div>
-                 <table className="table table-striped">
+            <div>
+                 <table className="table" >
                         <thead className="thead-light">
                             <tr className="row">
                                 <th className="col-2">Full Name</th>
@@ -26,7 +27,7 @@ class ApprovedComponent extends React.Component<IApprovedProps>
                                 <th className="col-3">Designation</th>
                                 <th className="col-2">Experience Type</th>
                                 <th className="col-1 text-center">Status</th>
-                                <th className="col-1 text-center">Actions</th>
+                                <th className="col-1">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,9 +37,16 @@ class ApprovedComponent extends React.Component<IApprovedProps>
                                     <td className="col-3">{candidate.gmail}</td>
                                     <td className="col-3">{candidate.designation}</td>
                                     <td className="col-2">{candidate.experiencetype}</td>
-                                    <td className="col-1 text-center"><span className="px-2 rounded-4 text-white" style={{padding:"3px 10px",backgroundColor:"#28a745"}}>{candidate.verificationstatus}</span></td>
-                                    <td id={candidate.gmail} className="col-1 text-center">  
-                                        <span><i className="bi bi-eye-fill text-easify px-2"></i></span>
+                                    <td className="col-1 text-center text-white">
+                                        <span className={`rounded-4 bg-success1
+                                             ${candidate.verificationstatus==="pending"? 'bg-pending':'bg-emailsend'} `}
+                                                 style={{padding:"3px 10px",fontSize:"12px"}} >
+                                                    {candidate.verificationstatus}
+                                        </span>
+                                    </td>
+                                    <td id={candidate.gmail} className="col-1 ">  
+                                        <i className="bi bi-pencil-fill text-easify px-2"></i>
+                                        <i className="bi bi-eye-fill text-easify px-2"></i>
                                     </td>
                                 </tr>
                             })}
@@ -50,4 +58,4 @@ class ApprovedComponent extends React.Component<IApprovedProps>
     }
 
 }
-export default ApprovedComponent;
+export default DashboardComponent;
